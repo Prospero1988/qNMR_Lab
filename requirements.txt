@@ -1,0 +1,8 @@
+numpy==2.3.5
+scipy==1.16.3
+PySide6==6.10.1
+pyqtgraph==0.14.0
+rdkit==2025.9.3
+openpyxl==3.1.5
+python-docx==1.2.0
+matplotlib==3.10.7

@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+outputs/
+*.qnmr
+!examples/*.qnmr
+*.log
+.bootstrap.lock
+.runtime/
+*.tmp
+projects/*
+!projects/.gitkeep
+reports/*
+!reports/.gitkeep
+
+# Local environments, build artifacts and credentials
+.env
+.env.*
+*.rar
+*.zip
+build/
+dist/
+
+# Optional private comparison fixtures
+validation/reference/
+
+outputs_public_tests.txt

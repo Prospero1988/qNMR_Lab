@@ -1,0 +1,49 @@
+[
+  {
+    "case": 0,
+    "processing": {},
+    "max_spectrum_error": 0.0,
+    "integral_difference": 0.0
+  },
+  {
+    "case": 1,
+    "processing": {
+      "lb_Hz": 1.5,
+      "gaussian_FWHM_Hz": 0.8,
+      "zero_fill_factor": 2
+    },
+    "max_spectrum_error": 0.0,
+    "integral_difference": 0.0
+  },
+  {
+    "case": 2,
+    "processing": {
+      "phase0_deg": 25.0,
+      "phase1_deg": -90.0,
+      "pivot_ppm": 4.2,
+      "ppm_shift": 0.03,
+      "filter_delay_samples": 0.7
+    },
+    "max_spectrum_error": 0.0,
+    "integral_difference": 0.0
+  },
+  {
+    "case": 3,
+    "processing": {
+      "baseline_regions": [
+        [
+          3.55,
+          3.7
+        ],
+        [
+          5.2,
+          5.4
+        ]
+      ],
+      "baseline_enabled": true,
+      "baseline_degree": 2
+    },
+    "max_spectrum_error": 0.0,
+    "integral_difference": 0.0
+  }
+]

@@ -21,6 +21,9 @@ jobs:
         run: |
           python -m venv .venv
           .\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt -r requirements-dev.txt
+      - name: Verify launcher environment
+        shell: pwsh
+        run: powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/bootstrap.ps1 -PrepareOnly -Language en
       - name: Run tests
         shell: pwsh
         env:

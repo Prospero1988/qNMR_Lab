@@ -39,7 +39,7 @@ def test_exports_numerical_values_and_traceability(project,tmp_path):
     rows=list(csv.DictReader((tmp_path/'integrals.csv').open(encoding='utf-8-sig')))
     assert len(rows)==2 and rows[0]['result_status']=='current'
     doc=Document(tmp_path/'report.docx');text='\n'.join(p.text for p in doc.paragraphs)
-    assert 'independent preparations' in text and 'complete measurement uncertainty' in text
+    assert 'independent preparations' in text and 'complete measurement uncertainty budget' in text
     assert doc.inline_shapes
     trace=json.loads((tmp_path/'traceability.json').read_text(encoding='utf-8'))
     from qnmr import __version__

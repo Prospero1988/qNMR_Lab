@@ -1,5 +1,16 @@
 # Software verification and scope
 
+## Report generator 1.0.1
+
+Public suite: **131 passed, 2 skipped** for the optional private workbook.
+New checks cover number/unit formatting, both languages/profiles, no raw
+dictionary/JSON prose, missing/nested values, exclusions, historical results,
+independent preparation counts, A4, tables, captions, links and structures.
+Model snapshots and spectral-array hashes remain identical. A local
+three-preparation report was compared with its original DOCX in 238 numeric/state
+checks, accounting for original printed rounding. Documents are rendered through
+Word → PDF → PNG for layout review; private source documents stay off GitHub.
+
 ## Public release 1.0
 
 Executed public suite: **112 passed, 2 skipped**. The skipped cases require the

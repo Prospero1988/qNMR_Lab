@@ -1,5 +1,16 @@
 # Weryfikacja oprogramowania i zakres
 
+## Generator raportów 1.0.1
+
+Publiczny zestaw: **131 testów zaliczonych, 2 pominięte** z powodu opcjonalnego
+prywatnego arkusza. Nowe testy sprawdzają formaty liczb i jednostek, oba języki
+i profile, brak słowników/JSON w treści, dane brakujące i zagnieżdżone,
+wykluczenia, wyniki historyczne, niezależność próbek, A4, tabele, podpisy,
+hiperłącza i struktury. Snapshoty danych i skróty tablic pozostają identyczne.
+Na lokalnym raporcie trzech próbek porównano 238 wartości/stanów z oryginalnym
+DOCX, z uwzględnieniem jego drukowanego zaokrąglenia. Dokumenty są renderowane
+Word → PDF → PNG do kontroli układu; źródła prywatne pozostają poza GitHubem.
+
 ## Wydanie publiczne 1.0
 
 Wykonany zestaw publiczny: **112 testów zaliczonych, 2 pominięte**. Pominięte

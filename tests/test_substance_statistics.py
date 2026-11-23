@@ -62,5 +62,7 @@ def test_reports_include_each_substance_with_its_own_n_mean_and_sd(substance_stu
     np.testing.assert_allclose(rows[header+2][2:4],[50,10],rtol=1e-12)
     export_docx(project,tmp_path/'substances.docx');doc=Document(tmp_path/'substances.docx')
     text='\n'.join(p.text for p in doc.paragraphs)
-    assert 'Substance result: Substance A' in text and 'Substance result: Substance B' in text
-    assert 'Mean assay 100.000' in text and 'Mean assay 50.000' in text and text.count('n = 3 independent preparations')==2
+    assert 'Substance A' in text and 'Substance B' in text
+    assert '100.000 % w/w' in text and '50.000 % w/w' in text
+    means=[table for table in doc.tables if table.rows[0].cells[0].text=='Mean assay (% w/w)']
+    assert len(means)==2 and [table.rows[1].cells[3].text for table in means]==['3','3']

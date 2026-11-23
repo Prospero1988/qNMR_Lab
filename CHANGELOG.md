@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.1 — 2026-11-23
+
+Source update; no new release tag is created by this change.
+
+- Redesigned A4 DOCX reports: identification, executive summary, balanced
+  structures, common/differing methodology, sample preparation, Office Math
+  equation, consolidated signal matrix, per-preparation results, statistics
+  and factual observations, with traceability appendices.
+- Centralized PL/ENG scientific number/date/unit formatting, superscript
+  notation, readable diagnostics, repeatable table headers and page numbers.
+- Added optional extended technical reports and selected-region enlargements;
+  retained full-precision machine records in bundle JSON.
+- Reporting consumes stored results without processing, recalculation or changes
+  to molecular records, integrals, inclusion decisions or independent sample counts.
+- Added report-format, localization, missing-data, export and read-only regression tests.
+
 ## 1.0 — 2026-11-23
 
 First public release / Pierwsze wydanie publiczne. Application version: 1.0.0.

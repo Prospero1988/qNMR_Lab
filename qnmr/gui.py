@@ -1105,10 +1105,11 @@ class MainWindow(W.QMainWindow):
     def export_report(self):
         if self.busy:error(self,tr('Wait for processing before exporting.'));return
         if not any(m.results for s in self.project.samples for m in s.measurements):error(self,tr('Calculate assay results before exporting.'));return
-        path,selected=W.QFileDialog.getSaveFileName(self,tr('Export quantitative analysis'),str(reports_directory()/(self.project.id+'.docx')),tr('Word report (*.docx);;Excel results (*.xlsx);;CSV integrals (*.csv);;Complete bundle (select *.folder)'))
+        path,selected=W.QFileDialog.getSaveFileName(self,tr('Export quantitative analysis'),str(reports_directory()/(self.project.id+'.docx')),tr('Word report (*.docx);;Extended technical Word report (*.docx);;Excel results (*.xlsx);;CSV integrals (*.csv);;Complete bundle (select *.folder)'))
         if not path:return
         try:
             if '*.folder' in selected:export_bundle(self.project,Path(path).with_suffix(''))
+            elif selected==tr('Extended technical Word report (*.docx)'):export_docx(self.project,Path(path).with_suffix('.docx'),profile='extended')
             elif '*.docx' in selected:export_docx(self.project,Path(path).with_suffix('.docx'))
             elif '*.xlsx' in selected:export_xlsx(self.project,Path(path).with_suffix('.xlsx'))
             else:export_csv(self.project,Path(path).with_suffix('.csv'))

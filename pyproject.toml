@@ -1,6 +1,6 @@
 [project]
 name = "qnmr-lab"
-version = "1.0.0"
+version = "1.0.1"
 description = "Standalone quantitative proton NMR using an internal standard"
 requires-python = ">=3.12,<3.13"
 license = "MIT"

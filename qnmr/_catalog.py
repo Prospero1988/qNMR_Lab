@@ -1,5 +1,7 @@
 """Reviewed presentation catalog. Stable machine keys are never localized in storage."""
 PL={
+    'Extended technical Word report (*.docx)':'Rozszerzony raport techniczny Word (*.docx)',
+    'Word report (*.docx);;Extended technical Word report (*.docx);;Excel results (*.xlsx);;CSV integrals (*.csv);;Complete bundle (select *.folder)':'Raport Word (*.docx);;Rozszerzony raport techniczny Word (*.docx);;Wyniki Excel (*.xlsx);;Całki CSV (*.csv);;Pełny zestaw (wybierz *.folder)',
     'Open synthetic example':'Otwórz przykład syntetyczny',
     'Exclusion reason (optional)':'Powód wykluczenia (opcjonalnie)',
     'Substance / preparation / acquisition':'Substancja / próbka / pomiar',

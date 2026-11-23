@@ -1,5 +1,13 @@
 # qNMR Lab — instrukcja użytkownika (PL)
 
+## Nowe raporty naukowe
+
+Domyślny **Raport Word** ma układ A4 z podsumowaniem, metodyką, strukturami,
+wynikami i dodatkami identyfikowalności. W oknie eksportu można wybrać
+**Rozszerzony raport techniczny Word**, który dodaje pełną diagnostykę ROI,
+parametry i historię oraz powiększenia widma. Raport nie zmienia obliczeń.
+Szczegóły: [Raporty naukowe](REPORTS_PL.md).
+
 ## Uproszczona edycja ROI i katalog raportów
 
 Całki na widmie i w tabeli są pokazywane z dwoma miejscami po przecinku.

@@ -1,5 +1,10 @@
 # qNMR Lab 1.0
 
+Wersja źródłowa `main`: **1.0.1**, z przeprojektowanym generatorem raportów
+naukowych i opcjonalnym profilem technicznym. Ostatnie oznaczone wydanie to 1.0;
+aby użyć najnowszego generatora, uruchom kod z `main`.
+Opis: [Raporty PL](docs/REPORTS_PL.md) · [Reports ENG](docs/REPORTS_EN.md).
+
 [English](README_EN.md) · [Pobierz wydanie 1.0](https://github.com/Prospero1988/qNMR_Lab/releases/tag/v1.0) · [MIT](LICENSE)
 
 Aplikacja Windows do ilościowej analizy protonowego NMR ze wzorcem wewnętrznym.

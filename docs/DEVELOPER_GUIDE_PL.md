@@ -1,5 +1,15 @@
 # Podręcznik dewelopera (PL)
 
+## Warstwa raportów DOCX
+
+`report_data.py` odczytuje zapisany model, `report_format.py` formatuje liczby
+i wartości strukturalne, `report_text.py` zawiera etykiety PL/ENG,
+`report_figures.py` rysuje istniejące tablice i cząsteczki, a
+`report_document.py` składa dokument z powtarzalnych komponentów. `reports.py`
+zachowuje publiczny punkt wejścia `export_docx(..., profile='standard')`.
+Profil `extended` jest opcjonalny. Wersja formatu raportu to 2; konwencja
+obliczeń pozostaje 1.0.0. Nie wywołuje się przetwarzania ani calculate_project.
+
 ## Uproszczenia w 1.0
 
 Zapis ROIDialog oznacza podaną liczbę jąder jako zaakceptowaną. Zachowano pole

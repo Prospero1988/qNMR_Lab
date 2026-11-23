@@ -116,7 +116,7 @@ def test_roles_quality_and_standard_buttons_keep_canonical_data(app,project,code
         assert QtCore.QCoreApplication.translate('QPlatformTheme','Cancel')==('Anuluj' if code=='pl' else 'Cancel')
         assert dialog.protons.locale().decimalPoint()==(',' if code=='pl' else '.')
 
-@pytest.mark.parametrize('code,title,sheet',[('pl','Raport','Wyniki'),('en','research report','Results')])
+@pytest.mark.parametrize('code,title,sheet',[('pl','Ilościowa analiza ¹H NMR','Wyniki'),('en','Quantitative ¹H NMR Analysis','Results')])
 def test_localized_reports_preserve_numbers_and_canonical_trace(project,tmp_path,code,title,sheet):
     calculate_project(project);before=deepcopy(project_dict(project));summary=project_summary(project)
     with i18n.using_language(code):export_bundle(project,tmp_path/code)

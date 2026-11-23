@@ -1,5 +1,13 @@
 # qNMR Lab user manual
 
+## Redesigned scientific reports
+
+The default **Word report** uses A4 with an executive summary, methodology,
+structures, results and traceability appendices. The export dialog also offers
+**Extended technical Word report**, adding complete ROI diagnostics, settings,
+parameter history and enlarged spectral regions. Export does not change the
+calculation model. See [Scientific reports](REPORTS_EN.md).
+
 ## Simpler ROI editing and report folder
 
 Spectrum and table integrals show two decimal places. This is display formatting:

@@ -1,5 +1,15 @@
 # Developer guide
 
+## DOCX reporting layer
+
+`report_data.py` reads stored model data; `report_format.py` formats scientific
+numbers and structured values; `report_text.py` owns PL/ENG vocabulary;
+`report_figures.py` draws existing arrays/molecules; `report_document.py`
+composes reusable document components. `reports.py` retains the public
+`export_docx(..., profile='standard')` entry point with optional `extended`.
+Report format is version 2; the calculation convention remains 1.0.0. The
+reporting layer never calls processing or calculate_project.
+
 ## Workflow simplification in 1.0
 
 Saving ROIDialog accepts the entered nuclei count. `protons_confirmed` is

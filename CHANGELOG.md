@@ -2,7 +2,8 @@
 
 ## 1.0.1 — 2026-11-23
 
-Source update; no new release tag is created by this change.
+Current release. The v1.0.1 tag, deployment package and application all include
+the complete scientific report redesign.
 
 - Redesigned A4 DOCX reports: identification, executive summary, balanced
   structures, common/differing methodology, sample preparation, Office Math

@@ -1,4 +1,4 @@
-# qNMR Lab 1.0 PL/ENG — uruchomienie na drugim komputerze
+# qNMR Lab 1.0.1 PL/ENG — uruchomienie na drugim komputerze
 
 ## Domyślny zapis raportów
 
@@ -7,7 +7,13 @@ wybrać inny katalog. Projekty nadal domyślnie trafiają do `projects`.
 
 ## Zmiany w tej paczce
 
-Usuwanie elementów projektu z lewego panelu, drzewo substancja → próbka → pomiar,
+Wydanie **1.0.1** zawiera kompletny nowy generator raportów DOCX: naukowy układ
+A4, struktury, równanie ilościowe, tabele wyników i statystyk, wykresy oraz
+opcjonalny profil techniczny. Raport używa aktualnego języka PL/ENG. Szczegóły:
+`docs/REPORTS_PL.md` i `docs/REPORTS_EN.md` w paczce. Eksport jest dostępny
+z przycisku **Eksportuj raport**. Nie wymaga uruchamiania dodatkowych skryptów.
+
+Paczka zawiera także usuwanie elementów projektu z lewego panelu, drzewo substancja → próbka → pomiar,
 wyniki łączne każdej substancji i przełączanie jej statystyk. Co najmniej trzy
 niezależne próbki są wymagane do statusu kompletnego; powtórne pomiary nie
 zwiększają n. Instrukcje PL i ENG opisują cały przebieg pracy.

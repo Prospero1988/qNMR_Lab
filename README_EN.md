@@ -1,11 +1,11 @@
-# qNMR Lab 1.0
+# qNMR Lab 1.0.1
 
-Source version on `main`: **1.0.1**, with the redesigned scientific report
-generator and optional extended technical profile. The latest tagged release
-remains 1.0; run the source from `main` to use the new generator.
+Current release **1.0.1** includes the redesigned scientific report generator
+and optional extended technical profile. The deployment package, repository
+source and application version match. Run **Start_qNMR_Lab.bat** to start.
 See [Scientific reports](docs/REPORTS_EN.md).
 
-[Polski](README.md) · [Download release 1.0](https://github.com/Prospero1988/qNMR_Lab/releases/tag/v1.0) · [MIT](LICENSE)
+[Polski](README.md) · [Download current release 1.0.1](https://github.com/Prospero1988/qNMR_Lab/releases/latest) · [MIT](LICENSE)
 
 A Windows desktop application for quantitative proton NMR with an internal
 standard: process a JEOL FID, integrate signals, calculate substance results,
@@ -16,7 +16,7 @@ the **PL → ENG** button switches the interface and report language to English.
 
 ## Get started
 
-Download `qNMR_Lab_1.0_PL_EN_deployment.rar` from [release 1.0](https://github.com/Prospero1988/qNMR_Lab/releases/tag/v1.0),
+Download `qNMR_Lab_1.0.1_PL_EN_deployment.rar` from [current release 1.0.1](https://github.com/Prospero1988/qNMR_Lab/releases/latest),
 extract the complete folder and run **Start_qNMR_Lab.bat**.
 Requires **Windows x64, CPython 3.12 x64 and Internet on the first run**.
 The launcher creates a local environment with pinned dependencies and reuses it
@@ -42,6 +42,8 @@ cd qNMR_Lab
   substances, preparations, acquisitions and reference materials.
 - Spectrum color/width/grid preferences, PNG and CSV spectrum export.
 - **DOCX, XLSX, CSV** reports and complete bundles with traceability.
+  Scientific A4 DOCX reports include readable tables, structures and figures;
+  the optional technical profile adds detailed diagnostics.
 
 ## Substance → preparation → acquisition
 

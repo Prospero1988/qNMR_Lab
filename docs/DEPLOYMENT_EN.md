@@ -1,4 +1,4 @@
-# qNMR Lab 1.0 PL/ENG — deployment on another computer
+# qNMR Lab 1.0.1 PL/ENG — deployment on another computer
 
 ## Default report location
 
@@ -7,7 +7,13 @@ selected. Projects continue to default to `projects`.
 
 ## Changes in this package
 
-Delete records from the left panel, use the substance → preparation → acquisition
+Release **1.0.1** includes the complete redesigned DOCX generator: scientific A4
+layout, structures, quantitative equation, results and statistics tables,
+figures and optional technical profile. Reports follow the selected PL/ENG
+language. See `docs/REPORTS_EN.md` and `docs/REPORTS_PL.md` in the package.
+Use **Export report** in the application; no additional scripts are required.
+
+The package also lets you delete records from the left panel, use the substance → preparation → acquisition
 tree and review each substance's combined result and statistics. Complete
 status requires at least three independent preparations; repeat acquisitions
 do not increase n. PL and ENG manuals explain the complete workflow.

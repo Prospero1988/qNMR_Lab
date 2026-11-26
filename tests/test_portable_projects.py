@@ -30,7 +30,11 @@ def test_project_remains_complete_after_all_original_jdfs_are_removed(tmp_path):
             assert is_current(restored,sample,m) and m.options==old.options and m.rois==old.rois
             for key,value in old.arrays.items():np.testing.assert_array_equal(m.arrays[key],value)
             expected=m.arrays['spectrum'].copy()
-            reprocess(m,m.options);np.testing.assert_array_equal(m.arrays['spectrum'],expected)
+            reprocess(m,m.options)
+            # Independent FFT/baseline recomputation may differ at machine
+            # precision across CPUs. The stored-array round trip above remains
+            # bit-for-bit, as do the read-only reporting regression checks.
+            np.testing.assert_allclose(m.arrays['spectrum'],expected,rtol=1e-13,atol=1e-13)
     assert not calculate_project(restored)
     np.testing.assert_allclose(project_summary(restored)['between']['mean'],before['between']['mean'])
 

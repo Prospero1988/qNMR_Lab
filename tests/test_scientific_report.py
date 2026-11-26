@@ -146,7 +146,7 @@ def test_bundle_profile_is_recorded_and_keeps_machine_precision(project,tmp_path
     assert not calculate_project(project);before=deepcopy(project_dict(project))
     export_bundle(project,tmp_path,profile='extended')
     trace=json.loads((tmp_path/'traceability.json').read_text(encoding='utf-8'))
-    assert trace['report_profile']=='extended' and trace['report_format_version']=='2'
+    assert trace['report_profile']=='extended' and trace['report_format_version']=='3'
     assert trace['project']==before
 
 def test_extended_profile_is_available_in_export_dialog(app,project,tmp_path):

@@ -7,8 +7,17 @@ numbers and structured values; `report_text.py` owns PL/ENG vocabulary;
 `report_figures.py` draws existing arrays/molecules; `report_document.py`
 composes reusable document components. `reports.py` retains the public
 `export_docx(..., profile='standard')` entry point with optional `extended`.
-Report format is version 2; the calculation convention remains 1.0.0. The
+Report format is version 3; the calculation convention remains 1.0.0. The
 reporting layer never calls processing or calculate_project.
+
+`resonance_consistency.py` only reduces stored current signal results. Its
+Project-level correspondence field does not enter the quantitative fingerprint.
+Confirmed members have signatures of their chemical/ROI assignment; atom-based
+identities reject ambiguous duplicates. Each resonance must cover every included
+repeat of a preparation; deviations use the official stored preparation mean.
+Independent preparations have equal weights and sample SD uses n − 1. No
+significance tests or automatic exclusions are performed. `resonance_dialog.py`
+provides explicit confirmation, separate from the quantitative ROI editor.
 
 ## Workflow simplification in 1.0
 

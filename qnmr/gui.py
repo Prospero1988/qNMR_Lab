@@ -682,6 +682,7 @@ class MainWindow(W.QMainWindow):
         filemenu.addAction(tr('Project details…'),self.project_details);filemenu.addAction(tr('Save as…'),self.save_as)
         filemenu.addAction(tr('Import reference workbook…'),self.open_workbook)
         filemenu.addAction(tr('Open synthetic example'),self.open_reference_example)
+        filemenu.addAction(tr('Resonance correspondence…'),self.edit_resonance_correspondence)
         standardmenu=self.menuBar().addMenu(tr('Standards'))
         standardmenu.addAction(tr('Add reference material…'),self.add_standard);standardmenu.addAction(tr('Import standard library…'),self.import_library);standardmenu.addAction(tr('Export standard library…'),self.export_library)
         toolsmenu=self.menuBar().addMenu(tr('Spectra'))
@@ -1115,6 +1116,14 @@ class MainWindow(W.QMainWindow):
             else:export_csv(self.project,Path(path).with_suffix('.csv'))
             self.statusBar().showMessage(tr('Export completed: ')+path,10000)
         except Exception as exc:error(self,exc)
+    def edit_resonance_correspondence(self):
+        if self.busy:error(self,tr('Wait for processing before exporting.'));return
+        from .resonance_dialog import ResonanceCorrespondenceDialog
+        dialog=ResonanceCorrespondenceDialog(self.project,self)
+        if dialog.exec():
+            self.project.resonance_correspondence=dialog.result
+            self.project.record('Resonance correspondence confirmed',groups=len(dialog.result))
+            self.mark_changed()
     def import_library(self):
         path,_=W.QFileDialog.getOpenFileName(self,tr('Import standard library'),'','JSON (*.json)')
         if path:

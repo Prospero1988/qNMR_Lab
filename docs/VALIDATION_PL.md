@@ -1,5 +1,22 @@
 # Weryfikacja oprogramowania i zakres
 
+## Wydanie 1.0.2
+
+Lokalny zestaw: **154 testy zaliczone**, w tym 21 przypadków nowej diagnostyki.
+Na GitHubie dwa testy prywatnego arkusza są opcjonalne. Sprawdzono potwierdzanie
+i zapis odpowiedników bez unieważniania wyników, brak utożsamiania sygnałów po
+S1/S2 lub ppm, przypisania atomowe, niejednoznaczności, wykluczenia, nieaktualne
+wyniki, brakujące przypisania, niepełne i nierówne liczby powtórnych pomiarów,
+n = 0/1/2 oraz oddzielne substancje. SD diagnostyczne używa n − 1, bez testu
+istotności. Wykresy zachowują malejącą oś ppm i nie zmieniają tablic.
+
+Na lokalnym projekcie referencyjnym porównano dokładnie 14 996 istniejących
+wartości liczbowych, model, wyniki, średnie, SD, RSD i przedziały ufności.
+Skróty tablic widm oraz źródeł silnika pozostały identyczne. Potwierdzenia
+odpowiedników zapisano oddzielnie od wyników; oryginalny projekt i raport
+pozostały niezmienione. Raporty PL/ENG wyrenderowano Word → PDF → PNG i
+sprawdzono wizualnie. Prywatne dokumenty i dane nie trafiają do dystrybucji.
+
 ## Generator raportów 1.0.1
 
 Publiczny zestaw: **131 testów zaliczonych, 2 pominięte** z powodu opcjonalnego

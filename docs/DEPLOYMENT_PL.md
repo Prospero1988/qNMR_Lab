@@ -1,4 +1,4 @@
-# qNMR Lab 1.0.1 PL/ENG — uruchomienie na drugim komputerze
+# qNMR Lab 1.0.2 PL/ENG — uruchomienie na drugim komputerze
 
 ## Domyślny zapis raportów
 
@@ -7,7 +7,12 @@ wybrać inny katalog. Projekty nadal domyślnie trafiają do `projects`.
 
 ## Zmiany w tej paczce
 
-Wydanie **1.0.1** zawiera kompletny nowy generator raportów DOCX: naukowy układ
+Nowość w 1.0.2: równanie z definicjami, powiększenia skupionych ROI oraz tabela
+i wykres zgodności rezonansów. Potwierdź odpowiedniki sygnałów w **Projekt →
+Odpowiedniki rezonansów…**; lokalne S1/S2 i sama zgodność ppm nie są tożsamością.
+Diagnostyka nie zmienia oznaczeń ani nie wyklucza sygnałów.
+
+Wydanie **1.0.2** zawiera kompletny nowy generator raportów DOCX: naukowy układ
 A4, struktury, równanie ilościowe, tabele wyników i statystyk, wykresy oraz
 opcjonalny profil techniczny. Raport używa aktualnego języka PL/ENG. Szczegóły:
 `docs/REPORTS_PL.md` i `docs/REPORTS_EN.md` w paczce. Eksport jest dostępny

@@ -1,9 +1,24 @@
 # Changelog
 
+## 1.0.2 — 2026-11-26
+
+- Expanded the editable Word equation with normalized-integral fractions and
+  explicit definitions, including total weighed sample mass and fractional purity.
+- Retained full spectra and added enlargements of clustered quantitative ROIs.
+- Added descriptive resonance consistency tables and assay/deviation plots using
+  independent preparations with equal weights, without changing assay calculations.
+- Added Project → Resonance correspondence for explicit analyst confirmation.
+  Unambiguous molecular atom assignments are also supported; local S IDs and ppm
+  names alone never establish identity. Correspondence is portable and requires
+  reconfirmation after changes to the chemical structure or ROI assignment.
+- Added regression coverage for incomplete acquisitions, missing assignments,
+  exclusions, unequal repeats, nonindependent samples and small sample counts.
+- Report format is 3; calculation convention remains 1.0.0. Reporting and diagnostics
+  preserve stored results, sample statistics and spectral arrays.
+
 ## 1.0.1 — 2026-11-23
 
-Current release. The v1.0.1 tag, deployment package and application all include
-the complete scientific report redesign.
+Scientific report redesign integrated into the application.
 
 - Redesigned A4 DOCX reports: identification, executive summary, balanced
   structures, common/differing methodology, sample preparation, Office Math

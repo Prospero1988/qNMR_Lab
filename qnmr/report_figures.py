@@ -1,7 +1,7 @@
 """White-background report figures from existing arrays and molecular records."""
 from io import BytesIO
 import numpy as np
-from .report_data import sample_code
+from .report_data import sample_code,shift
 from .report_text import label
 from .report_format import number
 from .i18n import language
@@ -26,20 +26,28 @@ def png(fig):
     stream=BytesIO();fig.savefig(stream,format='png',dpi=240,facecolor='white')
     return stream.getvalue()
 
-def spectrum(measurement,*,zoom=False):
+def quantitative_regions(measurement, *, clusters_only=False):
+    ranges=[]
+    for roi in sorted(measurement.rois,key=lambda r:r.low):
+        if not roi.accepted or roi.role not in ('analyte','standard') or clusters_only and roi.role!='analyte':continue
+        if ranges and roi.low-ranges[-1]['high']<.45:
+            ranges[-1]['high']=max(ranges[-1]['high'],roi.high);ranges[-1]['rois'].append(roi)
+        else:ranges.append(dict(low=roi.low,high=roi.high,rois=[roi]))
+    return [region for region in ranges if not clusters_only or len(region['rois'])>=2]
+
+
+def spectrum(measurement,*,zoom=False,clusters_only=False):
     if 'spectrum' not in measurement.arrays or 'ppm' not in measurement.arrays:return None
     x=measurement.arrays['ppm'];y=measurement.arrays['spectrum'][0].real
     if zoom:
-        ranges=[]
-        for roi in sorted(measurement.rois,key=lambda r:r.low):
-            if not roi.accepted:continue
-            if ranges and roi.low-ranges[-1][1]<.45:ranges[-1][1]=max(ranges[-1][1],roi.high)
-            else:ranges.append([roi.low,roi.high])
+        ranges=quantitative_regions(measurement,clusters_only=clusters_only)
         if not ranges:return None
-        fig=canvas(6.6,1.45*((len(ranges)+1)//2));axes=fig.subplots((len(ranges)+1)//2,2,squeeze=False).ravel()
-        for ax,bounds in zip(axes,ranges):
-            padding=max(.04,(bounds[1]-bounds[0])*.12);mask=(x>=bounds[0]-padding)&(x<=bounds[1]+padding)
-            draw_spectrum(ax,measurement,x[mask],y[mask]);ax.set_xlabel('δ ¹H (ppm)',fontsize=8)
+        columns=1 if len(ranges)==1 else 2
+        fig=canvas(6.6,1.85*((len(ranges)+columns-1)//columns));axes=fig.subplots((len(ranges)+columns-1)//columns,columns,squeeze=False).ravel()
+        for ax,region in zip(axes,ranges):
+            lo,hi=region['low'],region['high']
+            padding=max(.045,(hi-lo)*.15);mask=(x>=lo-padding)&(x<=hi+padding)
+            draw_spectrum(ax,measurement,x[mask],y[mask],detail=True);ax.set_xlabel('δ ¹H (ppm)',fontsize=8)
         for ax in axes[len(ranges):]:ax.set_visible(False)
     else:
         fig=canvas(6.6,2.1);ax=fig.add_subplot();draw_spectrum(ax,measurement,x,y)
@@ -47,7 +55,7 @@ def spectrum(measurement,*,zoom=False):
         ax.set_ylabel('Intensywność (j.u.)' if language()=='pl' else 'Intensity (a.u.)',fontsize=8)
     return png(fig)
 
-def draw_spectrum(ax,m,x,y):
+def draw_spectrum(ax,m,x,y,*,detail=False):
     style(ax)
     if not len(x):return
     ax.plot(x,y,lw=.55,color=NAVY);ax.axhline(0,color=GRAY,lw=.45)
@@ -56,14 +64,40 @@ def draw_spectrum(ax,m,x,y):
     previous=[];span=max(np.ptp(x),1e-9)
     for roi in sorted(m.rois,key=lambda r:r.low):
         mid=(roi.low+roi.high)/2
-        if mid<min(x) or mid>max(x):continue
+        if roi.high<min(x) or roi.low>max(x):continue
         color=GRAY if not roi.accepted else TEAL if roi.role=='standard' else NAVY
         ax.axvspan(roi.low,roi.high,color=color,alpha=.12 if roi.accepted else .05)
         ax.axvline(roi.low,color=color,lw=.45,alpha=.7);ax.axvline(roi.high,color=color,lw=.45,alpha=.7)
-        level=next((level for level in range(4) if all(abs(mid-other)>.055*span or level!=used for other,used in previous)),len(previous)%4)
+        if mid<min(x) or mid>max(x):continue
+        level=next((level for level in range(4) if all(abs(mid-other)>(.14 if detail else .055)*span or level!=used for other,used in previous)),len(previous)%4)
         previous.append((mid,level))
-        ax.text(mid,.97-.105*level,m.roi_label(roi),transform=ax.get_xaxis_transform(),ha='center',va='top',fontsize=7,color=color,
+        content=m.roi_label(roi)+(('\n'+number(shift(roi),3)) if detail else '')
+        ax.text(mid,.97-(.19 if detail else .105)*level,content,transform=ax.get_xaxis_transform(),ha='center',va='top',fontsize=7,color=color,
             bbox=dict(facecolor='white',edgecolor='none',alpha=.8,pad=.3))
+
+
+def resonance_consistency(diagnostic):
+    if not diagnostic['plot_available']:return None
+    rows=[r for r in diagnostic['rows'] if r['n']>=2]
+    samples=list(dict.fromkeys((p['sample_id'],p['sample']) for r in rows for p in r['points']))
+    fig=canvas(6.6,3.7);axes=fig.subplots(2,1,sharex=True)
+    palette=[NAVY,TEAL,'#b35a1f','#8053a1','#a33657','#5c752c']
+    for index,row in enumerate(rows):
+        values={p['sample_id']:p for p in row['points']}
+        legend='δ '+number(row['ppm'],3)+' ppm'
+        if not row['name'].endswith('ppm'):legend+=' / '+row['name']
+        for ax,key in zip(axes,('assay','deviation')):
+            ax.plot(range(len(samples)),[values[sid][key] if sid in values else np.nan for sid,_ in samples],
+                'o-',color=palette[index%len(palette)],ms=4,lw=.85,label=legend)
+    for ax in axes:style(ax);ax.margins(x=.1,y=.25)
+    axes[0].set_ylabel(label('assay'),fontsize=8)
+    axes[0].legend(frameon=False,fontsize=7,ncol=2,loc='lower left',bbox_to_anchor=(0,1.01))
+    axes[1].axhline(0,color=GRAY,lw=.6,ls='--')
+    axes[1].set_ylabel(label('centered_deviation'),fontsize=8)
+    labels=[sample_code(name) for _,name in samples]
+    axes[1].set_xticks(range(len(samples)),labels,rotation=20 if any(len(name)>16 for name in labels) else 0)
+    axes[1].set_xlabel(label('sample'),fontsize=8)
+    return png(fig)
 
 def statistics(summary):
     rows=summary['samples']

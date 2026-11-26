@@ -1,5 +1,17 @@
 """Reviewed presentation catalog. Stable machine keys are never localized in storage."""
 PL={
+    '¹H count':'Liczba ¹H',
+    'Resonance correspondence':'Odpowiedniki rezonansów',
+    'Resonance correspondence…':'Odpowiedniki rezonansów…',
+    'Confirmed resonance name':'Potwierdzona nazwa rezonansu',
+    'Suggest names from current signal names':'Zaproponuj nazwy z aktualnych nazw sygnałów',
+    'Confirm correspondence and save':'Potwierdź odpowiedniki i zapisz',
+    'Enter the same resonance name only for corresponding analyte signals. Atom assignments are used automatically when unambiguous. Local S IDs and chemical shifts alone do not establish identity. Confirming saves diagnostic correspondence without changing assay results. Empty names are not compared.':'Wpisz tę samą nazwę rezonansu wyłącznie dla odpowiadających sobie sygnałów analitu. Jednoznaczne przypisania atomowe są używane automatycznie. Lokalne ID S i samo przesunięcie chemiczne nie dowodzą tożsamości. Potwierdzenie zapisuje odpowiedniki do diagnostyki bez zmiany wyników oznaczenia. Puste nazwy nie są porównywane.',
+    'Each correspondence requires a name and members.':'Każdy odpowiednik wymaga nazwy i przypisanych sygnałów.',
+    'A resonance must have at most one ROI per acquisition; assignments must be unique.':'Rezonans może mieć najwyżej jeden ROI w pomiarze; przypisania muszą być jednoznaczne.',
+    'Only assigned analyte ROIs can be compared.':'Można porównywać tylko przypisane ROI analitu.',
+    'Corresponding resonances must have the same analyte and contributing nuclei count.':'Odpowiadające sobie rezonanse muszą mieć ten sam analit i liczbę jąder.',
+    'Use a unique resonance name within each analyte.':'Użyj jednoznacznej nazwy rezonansu w obrębie analitu.',
     'Extended technical Word report (*.docx)':'Rozszerzony raport techniczny Word (*.docx)',
     'Word report (*.docx);;Extended technical Word report (*.docx);;Excel results (*.xlsx);;CSV integrals (*.csv);;Complete bundle (select *.folder)':'Raport Word (*.docx);;Rozszerzony raport techniczny Word (*.docx);;Wyniki Excel (*.xlsx);;Całki CSV (*.csv);;Pełny zestaw (wybierz *.folder)',
     'Open synthetic example':'Otwórz przykład syntetyczny',

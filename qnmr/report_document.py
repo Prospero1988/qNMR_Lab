@@ -221,14 +221,30 @@ class ScientificReport:
         if self.project.purpose and self.project.purpose!='Quantitative proton NMR using an internal standard':self.p(message(self.project.purpose))
         # Office Math uses true fractions and subscripts, not a serialized equation.
         def run(content):
-            node=OxmlElement('m:r');t=OxmlElement('m:t');t.text=content;node.append(t);return node
+            node=OxmlElement('m:r');props=OxmlElement('w:rPr')
+            fonts=OxmlElement('w:rFonts');fonts.set(qn('w:ascii'),'Cambria Math');fonts.set(qn('w:hAnsi'),'Cambria Math');props.append(fonts)
+            size=OxmlElement('w:sz');size.set(qn('w:val'),'24');props.append(size);node.append(props)
+            t=OxmlElement('m:t');t.text=content;node.append(t);return node
         def sub(base,index):
             node=OxmlElement('m:sSub');e=OxmlElement('m:e');e.append(run(base));s=OxmlElement('m:sub');s.append(run(index));node.extend([e,s]);return node
-        def fraction(base,top,bottom):
-            node=OxmlElement('m:f');num=OxmlElement('m:num');num.append(sub(base,top));den=OxmlElement('m:den');den.append(sub(base,bottom));node.extend([num,den]);return node
+        def fraction(top,bottom):
+            node=OxmlElement('m:f');num=OxmlElement('m:num');num.append(top);den=OxmlElement('m:den');den.append(bottom);node.extend([num,den]);return node
         p=self.doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
-        math=OxmlElement('m:oMath');math.extend([sub('w','A'),run(' (%) = '),fraction('I','A','IS'),run(' × '),fraction('N','IS','A'),run(' × '),fraction('M','A','IS'),run(' × '),fraction('m','IS','A'),run(' × '),sub('P','IS'),run(' × 100')]);p._p.append(math)
-        self.p(label('definitions'),'Report Small');self.p(label('equation_note'))
+        p.paragraph_format.space_before=Pt(8);p.paragraph_format.space_after=Pt(10);p.paragraph_format.keep_with_next=True
+        math=OxmlElement('m:oMath');math.extend([sub('w','A'),run(' (%) = '),
+            fraction(fraction(sub('I','A'),sub('N','A')),fraction(sub('I','IS'),sub('N','IS'))),run(' × '),
+            fraction(sub('M','A'),sub('M','IS')),run(' × '),fraction(sub('m','IS'),sub('m','sample')),
+            run(' × '),sub('P','IS'),run(' × 100')]);p._p.append(math)
+        definitions=[('w','A','definition_w'),('I','A, IS','definition_i'),('N','A, IS','definition_n'),
+                     ('M','A, IS','definition_mw'),('m','IS','definition_mass_is'),('m','sample','definition_mass_sample'),('P','IS','definition_purity')]
+        table=self.table([label('symbol'),label('meaning')],[['',label(key)] for _,_,key in definitions],[26,146],keep=True)
+        for row,(base,index,_) in zip(table.rows[1:],definitions):
+            symbol=OxmlElement('m:oMath')
+            for i,index_part in enumerate(index.split(', ')):
+                if i:symbol.append(run(', '))
+                symbol.append(sub(base,index_part))
+            row.cells[0].paragraphs[0]._p.append(symbol)
+        self.p(label('equation_note'))
 
     def selection(self):
         self.heading(label('signals'))
@@ -289,6 +305,9 @@ class ScientificReport:
                     for paragraph in ([node] if node.tag==qn('w:p') else node.iter(qn('w:p'))):
                         paragraph.get_or_add_pPr().get_or_add_keepNext().val=True
                 self.doc.paragraphs[-1].paragraph_format.keep_with_next=False
+                if figures.quantitative_regions(m,clusters_only=True):
+                    ranges='; '.join(interval([r['low'],r['high']],3)+' ppm' for r in figures.quantitative_regions(m,clusters_only=True))
+                    self.figure(figures.spectrum(m,zoom=True,clusters_only=True),rec['code']+'. '+label('cluster_zoom',ranges=ranges))
 
     def statistics(self):
         self.heading(label('statistics'))
@@ -313,7 +332,7 @@ class ScientificReport:
                     [50,38,30,26,28],numeric=(1,2,3,4))
 
     def discussion(self):
-        self.heading(label('discussion'));lowest=[]
+        self.heading(label('discussion'))
         for rec in self.data.records:
             if not self.data.eligible(rec):continue
             signals=[s for s in rec['measurement'].results.get('signals',[]) if s['role']=='analyte']
@@ -321,10 +340,9 @@ class ScientificReport:
             low=min(signals,key=lambda s:s['assay_percent']);high=max(signals,key=lambda s:s['assay_percent'])
             if number(low['assay_percent'],3)==number(high['assay_percent'],3):continue
             self.p(label('span',measurement=rec['code'],low=number(low['assay_percent'],3),high=number(high['assay_percent'],3),unit=label('fraction_unit'),signal=signal_name(low['signal'])))
-            lowest.append((rec['sample'].analyte_id,low['signal']))
-        for group in self.data.groups:
-            names=[name for key,name in lowest if key==group['analyte_id']]
-            if len(names)>1 and len(set(names))==1:self.p(label('consistent_low',signal=signal_name(names[0]),count=len(names)))
+        # Cross-sample conclusions require established resonance identity.
+        # Repeated local labels or rounded ppm names alone are never sufficient.
+        self.resonance_diagnostics()
         excluded=sum(not roi.accepted for rec in self.data.records for roi in rec['measurement'].rois)
         unassigned=sum(roi.role=='unassigned' for rec in self.data.records for roi in rec['measurement'].rois)
         if excluded:self.p(label('excluded_count',count=excluded),'Report Small')
@@ -336,6 +354,27 @@ class ScientificReport:
         else:self.p(label('no_qc'),'Report Small')
         if self.project.comments:self.p(self.project.comments)
 
+    def resonance_diagnostics(self):
+        from .resonance_consistency import resonance_consistency
+        self.heading(label('resonance_consistency'),2)
+        for diagnostic in resonance_consistency(self.project):
+            if len(self.project.compounds)>1:self.heading(diagnostic['name'],3)
+            rows=diagnostic['rows']
+            if not rows:
+                self.p(label('no_correspondence'),'Report Small');continue
+            self.p(label('consistency_method'),'Report Small')
+            self.table([label('resonance_shift'),label('mean_resonance_assay'),label('mean_deviation'),label('sd_deviation'),label('consistency_n'),label('consistency_class')],
+                [[number(r['ppm'],3)+('' if re.fullmatch(r'[-+]?\d+(?:[.,]\d+)?\s*ppm',r['name']) else '\n'+r['name']),number(r['mean_assay'],3),number(r['mean_deviation'],3),
+                  number(r['sd_deviation'],3),number(r['n'],0),label('consistency_'+r['classification'])] for r in rows],
+                [31,30,29,28,13,41],numeric=(1,2,3,4))
+            self.p(label('consistency_dependence'),'Report Small')
+            if diagnostic['unassigned'] or diagnostic['incomplete']:
+                self.p(label('consistency_omissions',unassigned=diagnostic['unassigned'],incomplete=diagnostic['incomplete']),'Report Small')
+            pair=diagnostic['persistent_pair']
+            if pair:
+                self.p(label('persistent_resonance',low=number(pair['low']['ppm'],3),high=number(pair['high']['ppm'],3),count=pair['n'],gap=number(pair['gap'],3)))
+            self.figure(figures.resonance_consistency(diagnostic),label('consistency_caption'))
+
     def limitations(self):
         self.heading(label('limitations'));self.p(label('limits_text'));self.p(label('no_inference'))
 
@@ -344,7 +383,7 @@ class ScientificReport:
         self.heading(label('trace'),2)
         self.table([label('parameter'),label('value')],[[label('project'),self.project.id],
             [label('software'),'qNMR Lab '+__version__],[label('calculation_version'),CALCULATION_VERSION],
-            [label('layout_version'),'2']], [45,127])
+            [label('layout_version'),'3']], [45,127])
         for rec in self.data.records:
             m=rec['measurement'];s=rec['sample'];self.heading(rec['code']+' — '+sample_code(s),3)
             rows=[[label('sample'),s.name],[label('original_name'),m.name],[label('internal_id'),m.id],

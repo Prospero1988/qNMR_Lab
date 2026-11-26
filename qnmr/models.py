@@ -146,6 +146,8 @@ class Project:
     statistics_settings: dict = field(default_factory=lambda: dict(confidence=.95,
         measurement_aggregation='equal measurement means',sample_aggregation='equal independent preparation means'))
     audit: list[dict[str, Any]] = field(default_factory=list)
+    # Diagnostic correspondence only; excluded from the quantitative fingerprint.
+    resonance_correspondence: list[dict[str, Any]] = field(default_factory=list)
 
     def compound(self, key: str) -> Compound:
         return next(c for c in self.compounds if c.id == key)

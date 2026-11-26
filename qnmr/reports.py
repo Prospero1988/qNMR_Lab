@@ -167,10 +167,11 @@ def export_docx(project,path,*,profile='standard'):
 
 
 def export_bundle(project,directory,*,profile='standard'):
+    from .resonance_consistency import resonance_consistency
     directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
     export_csv(project,directory/'integrals.csv');export_xlsx(project,directory/'results.xlsx');export_docx(project,directory/'report.docx',profile=profile)
-    (directory/'traceability.json').write_text(json.dumps(dict(application_version=__version__,report_language=language(),report_profile=profile,report_format_version='2',exported_at=utc_now(),
-        summary=project_summary(project),substance_results=substance_summaries(project),project=project_dict(project)),indent=2,ensure_ascii=False,allow_nan=False,default=_json_default),encoding='utf-8')
+    (directory/'traceability.json').write_text(json.dumps(dict(application_version=__version__,report_language=language(),report_profile=profile,report_format_version='3',exported_at=utc_now(),
+        summary=project_summary(project),substance_results=substance_summaries(project),resonance_consistency=resonance_consistency(project),project=project_dict(project)),indent=2,ensure_ascii=False,allow_nan=False,default=_json_default),encoding='utf-8')
     for s in project.samples:
         for m in s.measurements:
             if m.arrays:spectrum_png(m,directory/f'spectrum_{s.id}_{m.id}.png')

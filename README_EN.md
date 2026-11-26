@@ -1,11 +1,11 @@
-# qNMR Lab 1.0.1
+# qNMR Lab 1.0.2
 
-Current release **1.0.1** includes the redesigned scientific report generator
+Current release **1.0.2** includes the redesigned scientific report generator
 and optional extended technical profile. The deployment package, repository
 source and application version match. Run **Start_qNMR_Lab.bat** to start.
 See [Scientific reports](docs/REPORTS_EN.md).
 
-[Polski](README.md) · [Download current release 1.0.1](https://github.com/Prospero1988/qNMR_Lab/releases/latest) · [MIT](LICENSE)
+[Polski](README.md) · [Download current release 1.0.2](https://github.com/Prospero1988/qNMR_Lab/releases/latest) · [MIT](LICENSE)
 
 A Windows desktop application for quantitative proton NMR with an internal
 standard: process a JEOL FID, integrate signals, calculate substance results,
@@ -16,7 +16,7 @@ the **PL → ENG** button switches the interface and report language to English.
 
 ## Get started
 
-Download `qNMR_Lab_1.0.1_PL_EN_deployment.rar` from [current release 1.0.1](https://github.com/Prospero1988/qNMR_Lab/releases/latest),
+Download `qNMR_Lab_1.0.2_PL_EN_deployment.rar` from [current release 1.0.2](https://github.com/Prospero1988/qNMR_Lab/releases/latest),
 extract the complete folder and run **Start_qNMR_Lab.bat**.
 Requires **Windows x64, CPython 3.12 x64 and Internet on the first run**.
 The launcher creates a local environment with pinned dependencies and reuses it
@@ -44,6 +44,9 @@ cd qNMR_Lab
 - **DOCX, XLSX, CSV** reports and complete bundles with traceability.
   Scientific A4 DOCX reports include readable tables, structures and figures;
   the optional technical profile adds detailed diagnostics.
+- Descriptive resonance consistency across independent preparations: deviation
+  tables, assay/deviation plots and persistent-pattern observations without
+  changing assay results. Confirm identities in **Project → Resonance correspondence…**.
 
 ## Substance → preparation → acquisition
 

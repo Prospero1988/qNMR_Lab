@@ -11,6 +11,7 @@ from qnmr.analysis import import_jdf,update_integrals,reprocess
 from qnmr.quantification import calculate_project,project_summary
 from qnmr.storage import save_project
 from qnmr.reports import export_bundle
+from qnmr.resonance_consistency import confirm_correspondence
 
 def main():
     project=Project(name='Synthetic qNMR workflow — three preparations')
@@ -40,6 +41,7 @@ def main():
         update_integrals(m);project.samples.append(sample)
     errors=calculate_project(project)
     if errors:raise RuntimeError(errors)
+    project.resonance_correspondence=confirm_correspondence(project,[dict(label=name,members=[(m.id,r.id) for s in project.samples for m in s.measurements for r in m.rois if r.signal==name]) for name in ('A 7.9','A 3.3')],analyst='Synthetic simulator: known generated resonance identities')
     save_project(project,ROOT/'examples/synthetic_three_samples.qnmr')
     export_bundle(project,ROOT/'outputs/synthetic_validation')
     print(project_summary(project)['between'])

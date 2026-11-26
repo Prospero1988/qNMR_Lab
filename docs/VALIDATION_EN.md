@@ -1,5 +1,22 @@
 # Software verification and scope
 
+## Release 1.0.2
+
+The local suite passed **154 tests**, including 21 resonance-diagnostic cases.
+Two private-workbook checks are optional on GitHub. Coverage includes explicit
+correspondence without invalidating stored results, no matching by local S IDs
+or ppm alone, molecular atom assignments, ambiguity, exclusions, stale results,
+missing identity, incomplete/unequal repeats, n = 0/1/2 and separate analytes.
+Diagnostic SD uses n − 1 without significance testing. Figures preserve descending
+ppm axes and unchanged spectral arrays.
+
+The local reference project retained exactly 14,996 existing numerical values,
+model fields, assay results, sample means, SD, RSD and confidence intervals.
+Spectral-array and calculation-engine source hashes were identical. Confirmed
+correspondence was added separately; the original project and report were preserved.
+PL/ENG reports were rendered through Word → PDF → PNG and visually inspected.
+Private laboratory data and documents are not distributed.
+
 ## Report generator 1.0.1
 
 Public suite: **131 passed, 2 skipped** for the optional private workbook.

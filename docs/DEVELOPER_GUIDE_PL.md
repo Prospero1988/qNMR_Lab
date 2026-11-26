@@ -7,8 +7,16 @@ i wartości strukturalne, `report_text.py` zawiera etykiety PL/ENG,
 `report_figures.py` rysuje istniejące tablice i cząsteczki, a
 `report_document.py` składa dokument z powtarzalnych komponentów. `reports.py`
 zachowuje publiczny punkt wejścia `export_docx(..., profile='standard')`.
-Profil `extended` jest opcjonalny. Wersja formatu raportu to 2; konwencja
+Profil `extended` jest opcjonalny. Wersja formatu raportu to 3; konwencja
 obliczeń pozostaje 1.0.0. Nie wywołuje się przetwarzania ani calculate_project.
+
+`resonance_consistency.py` redukuje wyłącznie aktualne zapisane wyniki sygnałów.
+Pole odpowiedników w Project nie wchodzi do odcisku obliczeń. Potwierdzone wpisy
+zawierają skrót przypisania chemicznego i ROI; niejednoznaczne przypisania atomowe
+są pomijane. Rezonans musi występować we wszystkich uwzględnionych powtórzeniach
+próbki. Odchylenia odnoszą się do oficjalnej średniej próbki, z równymi wagami
+niezależnych przygotowań i SD z n − 1. Nie wykonuje się testów istotności ani
+wykluczeń. `resonance_dialog.py` zapisuje jawne potwierdzenia poza edytorem ROI.
 
 ## Uproszczenia w 1.0
 

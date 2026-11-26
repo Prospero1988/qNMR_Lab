@@ -362,6 +362,24 @@ come from the project only; no signatures, approvals, accreditation, relaxation
 validation or outlier conclusions are invented. DOCX export does not need Word
 or LibreOffice installed. Integrated PDF export is not implemented.
 
+## Resonance correspondence and diagnostics in 1.0.2
+
+Use **Project → Resonance correspondence…** to enter the same name for signals
+that represent the same resonance in different preparations. Optionally suggest
+names from current signal names, review each row, then choose **Confirm
+correspondence and save**. Empty names are omitted. A resonance can have at most
+one ROI per acquisition. Local S IDs or matching ppm alone do not establish identity.
+Unambiguous molecular atom assignments are also used automatically. After editing
+the chemical structure or ROI assignment/bounds, confirm correspondence again.
+
+The standard report shows mean resonance assays and their deviations from each
+preparation's official mean, averaging repeat acquisitions within preparations.
+Diagnostics do not change assay results, perform significance tests or exclude
+signals. Plots require at least two comparable resonances in two shared independent
+preparations. Persistent direction is not claimed for fewer than three preparations.
+See [Scientific reports](REPORTS_EN.md) for details, including dependence on a mean
+containing the tested resonance.
+
 ## Synthetic example and workbook import
 
 **Project → Open synthetic example** opens three preparations with embedded

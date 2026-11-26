@@ -1,11 +1,11 @@
-# qNMR Lab 1.0.1
+# qNMR Lab 1.0.2
 
-Aktualne wydanie **1.0.1** zawiera przeprojektowany generator raportów
+Aktualne wydanie **1.0.2** zawiera przeprojektowany generator raportów
 naukowych i opcjonalny profil techniczny. Paczka deploymentowa, kod w repozytorium
 i wersja aplikacji są zgodne. Uruchom aplikację plikiem **Start_qNMR_Lab.bat**.
 Opis: [Raporty PL](docs/REPORTS_PL.md) · [Reports ENG](docs/REPORTS_EN.md).
 
-[English](README_EN.md) · [Pobierz aktualne wydanie 1.0.1](https://github.com/Prospero1988/qNMR_Lab/releases/latest) · [MIT](LICENSE)
+[English](README_EN.md) · [Pobierz aktualne wydanie 1.0.2](https://github.com/Prospero1988/qNMR_Lab/releases/latest) · [MIT](LICENSE)
 
 Aplikacja Windows do ilościowej analizy protonowego NMR ze wzorcem wewnętrznym.
 Od surowego FID JEOL przez przetwarzanie i całkowanie po wynik substancji,
@@ -16,7 +16,7 @@ przycisk **PL → ENG** przełącza cały interfejs i język raportów.
 
 ## Uruchomienie
 
-1. Pobierz i rozpakuj **cały** plik `qNMR_Lab_1.0.1_PL_EN_deployment.rar` z [aktualnego wydania 1.0.1](https://github.com/Prospero1988/qNMR_Lab/releases/latest).
+1. Pobierz i rozpakuj **cały** plik `qNMR_Lab_1.0.2_PL_EN_deployment.rar` z [aktualnego wydania 1.0.2](https://github.com/Prospero1988/qNMR_Lab/releases/latest).
 2. Uruchom **Start_qNMR_Lab.bat** z rozpakowanego folderu.
 3. Pierwszy start przygotuje środowisko i pobierze przypięte biblioteki.
 
@@ -45,6 +45,9 @@ cd qNMR_Lab
 - Raporty **DOCX, XLSX, CSV** oraz komplet danych z identyfikowalnością.
   Raport DOCX ma naukowy układ A4, czytelne tabele, struktury i wykresy;
   opcjonalny profil techniczny zawiera szczegółową diagnostykę.
+- Diagnostyka zgodności rezonansów w niezależnych próbkach: tabela odchyleń,
+  wykres zawartości i odchyleń oraz opis powtarzalnych różnic, bez zmiany wyników.
+  Odpowiedniki sygnałów potwierdzisz w **Projekt → Odpowiedniki rezonansów…**.
 
 ## Substancja → próbka → pomiar
 

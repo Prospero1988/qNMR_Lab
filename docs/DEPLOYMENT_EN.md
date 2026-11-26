@@ -1,4 +1,4 @@
-# qNMR Lab 1.0.1 PL/ENG — deployment on another computer
+# qNMR Lab 1.0.2 PL/ENG — deployment on another computer
 
 ## Default report location
 
@@ -7,7 +7,12 @@ selected. Projects continue to default to `projects`.
 
 ## Changes in this package
 
-Release **1.0.1** includes the complete redesigned DOCX generator: scientific A4
+New in 1.0.2: an equation with explicit definitions, clustered-ROI enlargements
+and resonance consistency tables/plots. Confirm identities in **Project →
+Resonance correspondence…**; local S IDs and ppm alone do not establish identity.
+Diagnostics do not change assay results or exclude signals.
+
+Release **1.0.2** includes the complete redesigned DOCX generator: scientific A4
 layout, structures, quantitative equation, results and statistics tables,
 figures and optional technical profile. Reports follow the selected PL/ENG
 language. See `docs/REPORTS_EN.md` and `docs/REPORTS_PL.md` in the package.

@@ -387,6 +387,24 @@ zatwierdzeń, akredytacji, potwierdzenia relaksacji ani wniosków o wartościach
 odstających. Generowanie DOCX nie wymaga Worda ani LibreOffice. Wbudowany
 eksport do PDF nie jest dostępny.
 
+## Odpowiedniki rezonansów i diagnostyka 1.0.2
+
+W **Projekt → Odpowiedniki rezonansów…** wpisz tę samą nazwę dla sygnałów,
+które są tym samym rezonansem w różnych próbkach. Możesz zaproponować nazwy
+z bieżących nazw sygnałów, sprawdzić każdą pozycję i kliknąć **Potwierdź
+odpowiedniki i zapisz**. Puste nazwy są pomijane. Jeden rezonans może mieć
+najwyżej jeden ROI w pomiarze. Sam numer S1/S2 albo zgodność ppm nie wystarcza.
+Jednoznaczne przypisania do atomów tego samego związku są używane automatycznie.
+Po zmianie struktury lub przypisania/granic ROI potwierdź odpowiedniki ponownie.
+
+Raport standardowy zawiera tabelę średnich wyników z rezonansów i ich odchyleń
+od średniej próbki. Powtórne pomiary są uśredniane w próbce. Opis jest wyłącznie
+diagnostyczny, bez testów istotności, automatycznych wykluczeń i zmiany oznaczeń.
+Wykres wymaga co najmniej dwóch porównywalnych rezonansów w dwóch wspólnych
+niezależnych próbkach. Dla mniej niż trzech próbek nie opisuje się kierunku
+jako powtarzalnego. Szczegóły i zależność od średniej zawierającej oceniany
+rezonans: [Raporty naukowe](REPORTS_PL.md).
+
 ## Przykład syntetyczny i import arkusza
 
 **Projekt → Otwórz przykład syntetyczny** otwiera gotowe trzy próbki z FID,
